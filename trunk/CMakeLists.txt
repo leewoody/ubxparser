@@ -5,7 +5,7 @@ SET( CMAKE_VERBOSE_MAKEFILE 0 )
 SET( CMAKE_CXX_FLAGS "-Wall -msse3 -mssse3 -msse4 -O3" ) #Disable pragma warning from GPSTk
 set (UbxParser_VERSION_MAJOR 2)
 set (UbxParser_VERSION_MINOR 3)
-set (UbxParser_VERSION_PATCH 15)
+set (UbxParser_VERSION_PATCH 16)
 set( CMAKE_BUILD_TYPE Release )
 
 # Looking for QtCore ==> QtEndian (à supprimer !)
@@ -52,20 +52,22 @@ SET_TARGET_PROPERTIES( UbxParser PROPERTIES
     DEBUG_POSTFIX "_d"
     SOVERSION ${UbxParser_VERSION_MAJOR}.${UbxParser_VERSION_MINOR}.${UbxParser_VERSION_PATCH} )
 
-# FIND_PATH( CMAKE_PATH NAMES CMakeSystem.cmake.in )
+# add a target to generate API documentation with Doxygen
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+MESSAGE( STATUS "Documentation can be build by : make doc" )
+configure_file( ${PROJECT_SOURCE_DIR}/Doxyfile.in ${PROJECT_SOURCE_DIR}/Doxyfile @ONLY)
+add_custom_target(doc
+${DOXYGEN_EXECUTABLE} ${PROJECT_SOURCE_DIR}/Doxyfile
+WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+COMMENT "Generating API documentation with Doxygen" VERBATIM
+)
 
-# FIND_PACKAGE( Doxygen )
-#
-# ADD_CUSTOM_COMMAND(
-#   OUTPUT ${PROJECT_SOURCE_DIR}
-#   COMMAND ${CMAKE_COMMAND} -E echo_append "Building API Documentation..."
-#   COMMAND ${DOXYGEN_EXECUTABLE} ${PROJECT_SOURCE_DIR}/Doxyfile
-#   COMMAND ${CMAKE_COMMAND} -E echo "Done."
-#   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-#   DEPENDS ${DOXYGEN_INPUT}
-#   )
+INSTALL( DIRECTORY ${PROJECT_SOURCE_DIR}/doc/html
+    DESTINATION /usr/share/doc/libubxparser-${UbxParser_VERSION_MAJOR}.${UbxParser_VERSION_MINOR}
+    COMPONENT htmldoc )
 
-#Install
+endif(DOXYGEN_FOUND)
 
 INSTALL(
   TARGETS UbxParser
@@ -201,7 +203,7 @@ SET( CPACK_PACKAGE_DESCRIPTION "A parsing toolbox for Ublox LEA-6T gps receiver.
 SET( CPACK_DEBIAN_PACKAGE_MAINTAINER  "Clement Fouque" )
 SET( CPACK_PACKAGE_VERSION_MAJOR ${UbxParser_VERSION_MAJOR} )
 SET( CPACK_PACKAGE_VERSION_MINOR ${UbxParser_VERSION_MINOR} )
-SET( CPACK_COMPONENTS_ALL libraries headers cmakemodule )
+SET( CPACK_COMPONENTS_ALL libraries headers cmakemodule manpage htmldoc )
 SET( CPACK_DEBIAN_PACKAGE_DEPENDS "libboost-thread1.46.1, libboost-signals1.46.1" )
 
 SET( CPACK_PACKAGE_NAME "libubxparser" )
