@@ -2,8 +2,8 @@
 # Project related configuration options
 #---------------------------------------------------------------------------
 DOXYFILE_ENCODING      = UTF-8
-PROJECT_NAME           = UBLOXRAW
-PROJECT_NUMBER         = 1.0
+PROJECT_NAME           = @PROJECT_NAME@
+PROJECT_NUMBER         = @UbxParser_VERSION_MAJOR@.@UbxParser_VERSION_MINOR@
 OUTPUT_DIRECTORY       = doc
 CREATE_SUBDIRS         = YES
 OUTPUT_LANGUAGE        = English
@@ -174,35 +174,18 @@ SERVER_BASED_SEARCH    = NO
 # configuration options related to the LaTeX output
 #---------------------------------------------------------------------------
 
-GENERATE_LATEX         = YES
-LATEX_OUTPUT           = latex
-LATEX_CMD_NAME         = latex
-MAKEINDEX_CMD_NAME     = makeindex
-COMPACT_LATEX          = NO
-PAPER_TYPE             = a4wide
-EXTRA_PACKAGES         =
-LATEX_HEADER           =
-PDF_HYPERLINKS         = YES
-USE_PDFLATEX           = YES
-LATEX_BATCHMODE        = NO
-LATEX_HIDE_INDICES     = NO
-LATEX_SOURCE_CODE      = NO
+GENERATE_LATEX         = NO
 
 #---------------------------------------------------------------------------
 # configuration options related to the RTF output
 #---------------------------------------------------------------------------
-GENERATE_RTF           = YES
-RTF_OUTPUT             = rtf
-COMPACT_RTF            = NO
-RTF_HYPERLINKS         = NO
-RTF_STYLESHEET_FILE    =
-RTF_EXTENSIONS_FILE    =
+GENERATE_RTF           = NO
 
 #---------------------------------------------------------------------------
 # configuration options related to the man page output
 #---------------------------------------------------------------------------
 
-GENERATE_MAN           = NO
+GENERATE_MAN           = YES
 MAN_OUTPUT             = man
 MAN_EXTENSION          = .3
 MAN_LINKS              = NO
@@ -211,11 +194,7 @@ MAN_LINKS              = NO
 # configuration options related to the XML output
 #---------------------------------------------------------------------------
 
-GENERATE_XML           = YES
-XML_OUTPUT             = xml
-XML_SCHEMA             =
-XML_DTD                =
-XML_PROGRAMLISTING     = YES
+GENERATE_XML           = NO
 
 #---------------------------------------------------------------------------
 # configuration options for the AutoGen Definitions output
@@ -225,8 +204,6 @@ GENERATE_AUTOGEN_DEF   = NO
 
 #---------------------------------------------------------------------------
 # configuration options related to the Perl module output
-#---------------------------------------------------------------------------
-
 
 GENERATE_PERLMOD       = NO
 PERLMOD_LATEX          = NO
