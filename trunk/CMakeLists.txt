@@ -56,9 +56,9 @@ SET_TARGET_PROPERTIES( UbxParser PROPERTIES
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
 MESSAGE( STATUS "Documentation can be build by : make doc" )
-configure_file( ${PROJECT_SOURCE_DIR}/Doxyfile.in ${PROJECT_SOURCE_DIR}/Doxyfile @ONLY)
+configure_file( ${PROJECT_SOURCE_DIR}/Doxyfile.in ${CMAKE_BINARY_DIR}/Doxyfile @ONLY)
 add_custom_target(doc
-${DOXYGEN_EXECUTABLE} ${PROJECT_SOURCE_DIR}/Doxyfile
+${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Doxyfile
 WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
 COMMENT "Generating API documentation with Doxygen" VERBATIM
 )
