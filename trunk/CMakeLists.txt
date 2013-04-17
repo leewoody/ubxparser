@@ -2,7 +2,7 @@ PROJECT( UbxParser )
 
 cmake_minimum_required(VERSION 2.6.0 FATAL_ERROR)
 SET( CMAKE_VERBOSE_MAKEFILE 0 )
-SET( CMAKE_CXX_FLAGS "-Wall -msse3 -mssse3 -msse4 -m64 -O3" ) #Disable pragma warning from GPSTk
+SET( CMAKE_CXX_FLAGS "-Wall -O3 -march=core2" ) #Disable pragma warning from GPSTk
 set (UbxParser_VERSION_MAJOR 2)
 set (UbxParser_VERSION_MINOR 3)
 set (UbxParser_VERSION_PATCH 16)
