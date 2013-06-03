@@ -2,10 +2,10 @@ PROJECT( UbxParser )
 
 cmake_minimum_required(VERSION 2.6.0 FATAL_ERROR)
 SET( CMAKE_VERBOSE_MAKEFILE 0 )
-SET( CMAKE_CXX_FLAGS "-Wall -O3 -march=core2" ) #Disable pragma warning from GPSTk
+SET( CMAKE_CXX_FLAGS "-Wall -O3 -march=native" ) #Disable pragma warning from GPSTk
 set (UbxParser_VERSION_MAJOR 2)
 set (UbxParser_VERSION_MINOR 3)
-set (UbxParser_VERSION_PATCH 16)
+set (UbxParser_VERSION_PATCH 17)
 set( CMAKE_BUILD_TYPE Release )
 
 # Looking for QtCore ==> QtEndian (à supprimer !)
@@ -50,7 +50,8 @@ ADD_LIBRARY( UbxParser SHARED ${UBX_SOURCES} )
 TARGET_LINK_LIBRARIES( UbxParser ${Boost_LIBRARIES} )
 SET_TARGET_PROPERTIES( UbxParser PROPERTIES
     DEBUG_POSTFIX "_d"
-    SOVERSION ${UbxParser_VERSION_MAJOR}.${UbxParser_VERSION_MINOR}.${UbxParser_VERSION_PATCH} )
+    VERSION ${UbxParser_VERSION_MAJOR}.${UbxParser_VERSION_MINOR}.${UbxParser_VERSION_PATCH} 
+    SOVERSION ${UbxParser_VERSION_MAJOR}.${UbxParser_VERSION_MINOR} )
 
 # add a target to generate API documentation with Doxygen
 find_package(Doxygen)
