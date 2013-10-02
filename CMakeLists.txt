@@ -5,7 +5,7 @@ SET( CMAKE_VERBOSE_MAKEFILE 0 )
 SET( CMAKE_CXX_FLAGS "-Wall -O3 -march=native" ) #Disable pragma warning from GPSTk
 set (UbxParser_VERSION_MAJOR 2)
 set (UbxParser_VERSION_MINOR 3)
-set (UbxParser_VERSION_PATCH 17)
+set (UbxParser_VERSION_PATCH 18)
 set( CMAKE_BUILD_TYPE Release )
 
 # Looking for QtCore ==> QtEndian (à supprimer !)
@@ -53,7 +53,7 @@ SET_TARGET_PROPERTIES( UbxParser PROPERTIES
     VERSION ${UbxParser_VERSION_MAJOR}.${UbxParser_VERSION_MINOR}.${UbxParser_VERSION_PATCH} 
     SOVERSION ${UbxParser_VERSION_MAJOR}.${UbxParser_VERSION_MINOR} )
 
-# add a target to generate API documentation with Doxygen
+#add a target to generate API documentation with Doxygen
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
 MESSAGE( STATUS "Documentation can be build by : make doc" )
@@ -65,7 +65,7 @@ COMMENT "Generating API documentation with Doxygen" VERBATIM
 )
 
 INSTALL( DIRECTORY ${PROJECT_SOURCE_DIR}/doc/html
-    DESTINATION /usr/share/doc/libubxparser-${UbxParser_VERSION_MAJOR}.${UbxParser_VERSION_MINOR}
+    DESTINATION share/doc/libubxparser-${UbxParser_VERSION_MAJOR}.${UbxParser_VERSION_MINOR}
     COMPONENT htmldoc )
 
 endif(DOXYGEN_FOUND)
@@ -191,11 +191,13 @@ INSTALL(
 )
 
 IF( UNIX )
+
   INSTALL(
     FILES ${PROJECT_SOURCE_DIR}/FindUbxParser.cmake
-    DESTINATION /usr/share/cmake-${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}/Modules
+    DESTINATION lib/cmake/libUbxParser
     COMPONENT cmakemodule
   )
+
 ENDIF( UNIX )
 
 SET( CPACK_GENERATOR "DEB" )
